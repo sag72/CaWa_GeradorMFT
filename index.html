@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lojas SALES CAWA</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.css"
+    />
+    <style>
+      #loading {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        padding: 2rem;
+        color: #444;
+      }
+      #loading .sp {
+        display: inline-block;
+        width: 14px; height: 14px; margin-right: 8px;
+        border: 3px solid #ccc; border-top-color: #ff4b4b;
+        border-radius: 50%; animation: spin 0.8s linear infinite;
+        vertical-align: middle;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <div id="loading">
+      <span class="sp"></span>A carregar a aplicação (primeira vez pode demorar
+      ~30&nbsp;s enquanto prepara o Python no browser)…
+    </div>
+    <div id="root"></div>
+    <script type="module">
+      import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.js";
+
+      mount(
+        {
+          requirements: [],
+          entrypoint: "app_web.py",
+          files: {
+            "app_web.py": { url: "./app_web.py" },
+            "lojas_sales_core.py": { url: "./lojas_sales_core.py" },
+            ".streamlit/config.toml": `
+[client]
+toolbarMode = "minimal"
+
+[theme]
+primaryColor = "#ff4b4b"
+
+[server]
+maxUploadSize = 200
+`,
+          },
+        },
+        document.getElementById("root"),
+      );
+
+      // Remove a mensagem de "a carregar" assim que a app renderiza.
+      const root = document.getElementById("root");
+      const obs = new MutationObserver(() => {
+        if (root.querySelector('[data-testid="stAppViewContainer"], .stApp')) {
+          const el = document.getElementById("loading");
+          if (el) el.remove();
+          obs.disconnect();
+        }
+      });
+      obs.observe(root, { childList: true, subtree: true });
+    </script>
+  </body>
+</html>
