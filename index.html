@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lojas SALES CAWA</title>
+    <title>Gerador de Applications MFT</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.css"
@@ -35,11 +35,11 @@
 
       mount(
         {
-          requirements: [],
+          requirements: ["openpyxl"],
           entrypoint: "app_web.py",
           files: {
             "app_web.py": { url: "./app_web.py" },
-            "lojas_sales_core.py": { url: "./lojas_sales_core.py" },
+            "mft_core.py": { url: "./mft_core.py" },
             ".streamlit/config.toml": `
 [client]
 toolbarMode = "minimal"
