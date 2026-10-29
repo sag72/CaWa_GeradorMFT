@@ -88,12 +88,12 @@ def run_generation(raw_rows, cols, start_row, eai_sources, infra):
 
 
 def main():
-    st.set_page_config(page_title="Gerador de Applications MFT", page_icon="🔁", layout="wide")
-    st.title("🔁 Gerador de Applications MFT (CA WA)")
+    st.set_page_config(page_title="Migrar Applications EAI para MFT", page_icon="🔁", layout="wide")
+    st.title("🔁 Migrar Applications EAI para MFT")
     st.caption(
-        "Corre no teu browser (nada é enviado para servidores). Lê o Excel de migração "
-        "EAI → MFT e gera um XML por application MFT, com o horário, dependências e jobs "
-        "ligados copiados do EAI de origem."
+        "Corre no teu navegador (nada é enviado para servidores). Lê o Excel de migração "
+        "EAI → MFT e gera um XML por cada processo MFT, mantendo os horários, as dependências "
+        "e os jobs associados ao processo EAI de origem."
     )
 
     # --- configuracao de infraestrutura -----------------------------------
